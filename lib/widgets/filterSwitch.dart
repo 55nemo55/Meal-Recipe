@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/constants.dart';
 import 'package:provider/provider.dart';
 
+import '../constants.dart';
 import '../models/provider_model.dart';
 
-Widget BuildFilterSwitch(filterName,value,filterProviderFunction) {
+Widget buildFilterSwitch(filterName,value,filterProviderFunction) {
   return Consumer<ProviderModel>(
     builder: (context, filter, child) {
       return Row(

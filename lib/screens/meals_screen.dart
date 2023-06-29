@@ -1,58 +1,44 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/categories_data.dart';
-import 'package:meal_app/models/meals_data.dart';
-import 'package:meal_app/models/provider_model.dart';
-import 'package:meal_app/screens/recipe_screen.dart';
-import 'package:meal_app/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 
+import '../models/categories_data.dart';
+import '../models/meals_data.dart';
+import '../models/provider_model.dart';
 import '../models/meal_object.dart';
+import './recipe_screen.dart';
 
 class MealsScreen extends StatelessWidget {
   static const routeName = 'mealsScreen';
 
   const MealsScreen({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
+    var mealProvider = Provider.of<MealData>(context);
+    var provider = Provider.of<ProviderModel>(context);
 
-    var mealProvider=Provider.of<MealData>(context);
-    var provider=Provider.of<ProviderModel>(context);
-
-
-
-    List<Meal> availableMealsList = mealProvider.listOfMeals.where((meal){
-      if(provider.filterData['vegan']! && !meal.isVegan){
+    List<Meal> availableMealsList = mealProvider.listOfMeals.where((meal) {
+      if (provider.filterData['vegan']! && !meal.isVegan) {
         return false;
-      }else if(provider.filterData['gluten']! && !meal.isGlutenFree){
+      } else if (provider.filterData['gluten']! && !meal.isGlutenFree) {
         return false;
-      }else if(provider.filterData['vegetarian']! && !meal.isVegetarian){
+      } else if (provider.filterData['vegetarian']! && !meal.isVegetarian) {
         return false;
-      }else if(provider.filterData['lactose']! && !meal.isLactoseFree){
+      } else if (provider.filterData['lactose']! && !meal.isLactoseFree) {
         return false;
-      }else{
+      } else {
         return true;
       }
     }).toList();
-
 
     final routeArg = ModalRoute.of(context)?.settings.arguments;
 
     final categoryId =
         Provider.of<CategoryData>(context).dummyCategories[routeArg].id;
 
-    final List<Meal> categoryMeals =
-    availableMealsList.where((meal) {
+    final List<Meal> categoryMeals = availableMealsList.where((meal) {
       return meal.categories.contains(categoryId) ? true : false;
     }).toList();
-
-
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -62,13 +48,15 @@ class MealsScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (BuildContext context, index) {
           return InkWell(
-            onTap: (){
-               Navigator.pushNamed(context, RecipeScreen.routeName,arguments: categoryMeals[index].id);},
+            onTap: () {
+              Navigator.pushNamed(context, RecipeScreen.routeName,
+                  arguments: categoryMeals[index].id);
+            },
             child: Card(
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-              margin:
-                  const EdgeInsets.only(left: 10, top: 15, right: 10, bottom: 10),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14)),
+              margin: const EdgeInsets.only(
+                  left: 10, top: 15, right: 10, bottom: 10),
               elevation: 6,
               child: Column(
                 children: [
@@ -92,8 +80,8 @@ class MealsScreen extends StatelessWidget {
                             topLeft: Radius.circular(10),
                           )),
                       width: 300,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 20),
                       margin: const EdgeInsets.only(bottom: 15),
                       child: Text(
                         categoryMeals[index].title,

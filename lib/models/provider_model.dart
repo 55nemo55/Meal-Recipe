@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'meal_object.dart';
+import './meal_object.dart';
 
 class ProviderModel extends ChangeNotifier {
   int selectedPageIndex = 0;

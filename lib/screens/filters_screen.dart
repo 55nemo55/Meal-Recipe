@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../widgets/drawer.dart';
 import '../widgets/filterSwitch.dart';
-import '../models/filters_model.dart';
 import '../models/provider_model.dart';
 
 class FiltersScreen extends StatelessWidget {
@@ -23,13 +22,13 @@ class FiltersScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 45.0, horizontal: 65),
           child: Column(
             children: [
-              BuildFilterSwitch('GlutenFree', provider.switchGlutenFreeValue,
+              buildFilterSwitch('GlutenFree', provider.switchGlutenFreeValue,
                   provider.toggleGlutenFreeSwitch),
-              BuildFilterSwitch('LactoseFree', provider.switchLactoseFreeValue,
+              buildFilterSwitch('LactoseFree', provider.switchLactoseFreeValue,
                   provider.toggleLactoseFreeSwitch),
-              BuildFilterSwitch('Vegetarian', provider.switchVegetarianValue,
+              buildFilterSwitch('Vegetarian', provider.switchVegetarianValue,
                   provider.toggleVegetarianSwitch),
-              BuildFilterSwitch('Vegan', provider.switchVeganValue,
+              buildFilterSwitch('Vegan', provider.switchVeganValue,
                   provider.toggleVeganSwitch),
             ],
           ),

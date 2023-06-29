@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/constants.dart';
-import 'package:meal_app/models/meals_data.dart';
-import 'package:meal_app/models/provider_model.dart';
 import 'package:provider/provider.dart';
 
+import '../models/meals_data.dart';
+import '../models/provider_model.dart';
 import '../models/meal_object.dart';
+import '../constants.dart';
 
 class RecipeScreen extends StatelessWidget {
   static const routeName = 'RecipeScreen';
@@ -13,23 +13,22 @@ class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context)?.settings.arguments;
-    Meal selectedMeal =
-        Provider.of<MealData>(context).listOfMeals.firstWhere((meal) {
-      return meal.id == mealId ? true : false;
-    });
-    Icon selectedIcon = const Icon(Icons.star_border_outlined);
+    Meal selectedMeal = Provider.of<MealData>(context).listOfMeals.firstWhere(
+      (meal) {
+        return meal.id == mealId ? true : false;
+      },
+    );
     return Consumer<ProviderModel>(
-      builder: (context,meal,child) {
+      builder: (context, meal, child) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             backgroundColor: kDarkestColor,
             child: selectedMeal.isFavorite
-                ? Icon(Icons.star)
-                : Icon(Icons.star_border_outlined),
+                ? const Icon(Icons.star)
+                : const Icon(Icons.star_border_outlined),
             onPressed: () {
-             meal.toggleIcon(selectedMeal);
-             meal.addToFavorites(selectedMeal);
-              print('${selectedMeal.isFavorite}');
+              meal.toggleIcon(selectedMeal);
+              meal.addToFavorites(selectedMeal);
             },
           ),
           backgroundColor: kLightestColor,
@@ -50,10 +49,7 @@ class RecipeScreen extends StatelessWidget {
                 ),
                 Text(
                   'Ingredients',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(
                   height: 15,
@@ -70,8 +66,8 @@ class RecipeScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         margin: const EdgeInsets.all(4),
-                        padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 10),
                         decoration: BoxDecoration(
                           color: kDarkColor,
                           borderRadius: BorderRadius.circular(5),
@@ -87,10 +83,7 @@ class RecipeScreen extends StatelessWidget {
                 ),
                 Text(
                   'Steps',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(
                   height: 15,
@@ -107,8 +100,8 @@ class RecipeScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         margin: const EdgeInsets.all(4),
-                        padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 10),
                         decoration: BoxDecoration(
                           color: kDarkColor,
                           borderRadius: BorderRadius.circular(5),
@@ -126,7 +119,7 @@ class RecipeScreen extends StatelessWidget {
             ),
           ),
         );
-
-      } );
+      },
+    );
   }
 }

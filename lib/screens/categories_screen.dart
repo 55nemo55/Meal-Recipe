@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/categories_data.dart';
 import '../models/category_object.dart';
-import 'meals_screen.dart';
+import './meals_screen.dart';
 
 
 class Categories extends StatelessWidget {
